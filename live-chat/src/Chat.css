@@ -1,0 +1,15 @@
+
+.message{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 22px;
+    color: #fff;
+}
+.message .username{
+    font-weight: 600;
+}
+.message .timestamp{
+    font-size: 12px;
+    line-height: 16px;
+    color: #C4C4C4;   
+}

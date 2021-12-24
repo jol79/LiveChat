@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Chat from './Chat';
 import reportWebVitals from './reportWebVitals';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Chat url="https://edikdolynskyi.github.io/react_sources/messages.json"/>
   </React.StrictMode>,
   document.getElementById('root')
 );
