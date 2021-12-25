@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
+import Header from './Header'
 import './Chat.css';
 
 const Chat = (props) => {
@@ -9,7 +10,6 @@ const Chat = (props) => {
 
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const messagesList = [];
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -26,20 +26,8 @@ const Chat = (props) => {
         return <>Loading...</>;
     }
 
-    messages.forEach(message => {
-        messagesList.push(
-            <div key={message.id}>
-                <p> <strong>Username: </strong>{message.user}<br/><strong>Text: </strong>{message.text}</p>
-            </div>
-        )
-    })
     return (
-        <div>
-            <h1>Messages</h1>
-            <div className="container-messages">
-                {messagesList}
-            </div>
-        </div>
+        <Header messages={messages} chatName={props.url}/>
     )
 }
 
