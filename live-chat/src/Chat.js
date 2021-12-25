@@ -1,7 +1,10 @@
 import React, { Component, useEffect, useState } from 'react';
 import Header from './Header';
-import Message from './Message';
+import MessageList from './MessageList';
+import MessageInput from './MessageInput';
 import './Chat.css';
+
+export const MessagesContext = React.createContext();
 
 const Chat = (props) => {
     /**
@@ -14,9 +17,8 @@ const Chat = (props) => {
 
     useEffect(() => {
         const fetchMessages = async () => {
-            const data = await fetch(
-                props.url
-            ).then(response => response.json());
+            const response = await fetch(props.url)
+            const data = await response.json();
             setMessages(data);
             setIsLoading(false);
         };
@@ -28,10 +30,13 @@ const Chat = (props) => {
     }
 
     return (
-        <div className='chat'>
-            <Header messages={messages} chatName={props.url} />
-            <Message messages={messages} />
-        </div>
+        <MessagesContext.Provider value={[messages, setMessages]}>
+            <div className='chat'>
+                <Header chatName={props.url} />
+                <MessageList />
+                <MessageInput />
+            </div>
+        </MessagesContext.Provider>
     )
 }
 
