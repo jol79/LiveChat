@@ -13,9 +13,19 @@ const Header = (props) => {
         var chatName = props.chatName;        
         var usersNumber = new Array();
         var messagesNumber = props.messages.length;
+        var lastMessageDate;
+
+        console.log(props.messages);
 
         props.messages.forEach(message => {
-            
+            if (!lastMessageDate){
+                lastMessageDate = new Date(message.createdAt);
+            }else{
+                if (lastMessageDate < new Date(message.createdAt)){
+                    lastMessageDate = new Date(message.createdAt)
+                }
+            }
+
             if (!usersNumber.includes(message.userId)){
                 usersNumber.push(message.userId);
             }
@@ -41,6 +51,11 @@ const Header = (props) => {
             <div className='header-messages-count'>
                 <p>
                     {messagesNumber} messages
+                </p>
+            </div>
+            <div className='header-last-message-date'>
+                <p>
+                    last message {`${lastMessageDate.toLocaleDateString("ru-RU")} ${lastMessageDate.toLocaleTimeString("ru-RU")}`}
                 </p>
             </div>
         </section>
