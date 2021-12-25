@@ -1,43 +1,31 @@
 import './Message.css';
 
-const Message = (props) => {
+const Message = ({messageObject}) => {
     /**
-     * Get the list of received meessages and return the representing 
-     * structure with the messages 
+     * Receive message object and return message component
     */
 
-    const messagesList = [];
+    if (messageObject){
+        const {avatar, user, text, createdAt} = messageObject
+        return (
+            <div className='message' id={messageObject.id} key={messageObject.id}>
+                <img className='message-user-avatar' src={messageObject.avatar}/>
 
-    try{
-        props.messages.forEach(message => {
-            messagesList.push(
-                <div className='message' id={message.id} key={message.id}>
-                    <img className='message-user-avatar' src={message.avatar}/>
-
-                    <div className='message-container'>
-                        <div className='message-user-name'>
-                            <p>{message.user}</p>
-                        </div>
-                        <div className='message-text'>
-                            <p>{message.text}</p>
-                        </div>
-                        <div className='message-time'>
-                            <p>{`${new Date(message.createdAt).getHours()}:${new Date(message.createdAt).getMinutes()}`}</p>
-                        </div>
-                        <div className='message-like'></div>
+                <div className='message-container'>
+                    <div className='message-user-name'>
+                        <p>{messageObject.user}</p>
                     </div>
+                    <div className='message-text'>
+                        <p>{messageObject.text}</p>
+                    </div>
+                    <div className='message-time'>
+                        <p>{`${new Date(messageObject.createdAt).getHours()}:${new Date(messageObject.createdAt).getMinutes()}`}</p>
+                    </div>
+                    <div className='message-like'></div>
                 </div>
-            )
-        });
-    }catch{
-        console.error("Unable to load the messages");
+            </div>
+        )
     }
-
-    return (
-        <div className='messages'>
-            {messagesList}
-        </div>
-    )
 }
 
 export default Message;

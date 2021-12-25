@@ -1,6 +1,8 @@
 import './Header.css';
+import { MessagesContext } from './Chat';
+import { useContext } from 'react';
 
-const Header = (props) => {
+const Header = ({ chatName }) => {
     /**
      * Returns the Header section with the following data:
      *  1. Chat name 
@@ -9,30 +11,35 @@ const Header = (props) => {
      *  4. The date of the last message
     */
 
-    try{
-        var chatName = props.chatName;        
-        var usersNumber = new Array();
-        var messagesNumber = props.messages.length;
-        var lastMessageDate;
+    const test = useContext(MessagesContext);
+    console.log("TEST: " + test);
+    const [messages, setMessages] = useContext(MessagesContext);
+    console.log("Header: " + messages);
 
-        props.messages.forEach(message => {
-            if (!lastMessageDate){
-                lastMessageDate = new Date(message.createdAt);
-            }else{
-                if (lastMessageDate < new Date(message.createdAt)){
-                    lastMessageDate = new Date(message.createdAt)
-                }
+    // try{
+    var chatName = messages.chatName;        
+    var usersNumber = new Array();
+    var messagesNumber = messages.length;
+    var lastMessageDate;
+
+    messages.forEach(message => {
+        if (!lastMessageDate){
+            lastMessageDate = new Date(message.createdAt);
+        }else{
+            if (lastMessageDate < new Date(message.createdAt)){
+                lastMessageDate = new Date(message.createdAt)
             }
+        }
 
-            if (!usersNumber.includes(message.userId)){
-                usersNumber.push(message.userId);
-            }
-        });
-        usersNumber = usersNumber.length;
+        if (!usersNumber.includes(message.userId)){
+            usersNumber.push(message.userId);
+        }
+    });
+    usersNumber = usersNumber.length;
 
-    }catch{
-        console.error("Unable to process the header");
-    }
+    // }catch{
+    //     console.error("Unable to process the header");
+    // }
 
     return (
         <section className='header'>

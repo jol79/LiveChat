@@ -1,11 +1,3 @@
-.messages{
-    max-height: 700px;
-    display: grid; 
-    grid-template-columns: auto;
-    justify-content: start;
-    overflow: hidden;
-    overflow-y: scroll;
-}
 .message{
     display: flex; 
     flex-direction: row;
