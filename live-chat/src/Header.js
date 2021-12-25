@@ -15,8 +15,6 @@ const Header = (props) => {
         var messagesNumber = props.messages.length;
         var lastMessageDate;
 
-        console.log(props.messages);
-
         props.messages.forEach(message => {
             if (!lastMessageDate){
                 lastMessageDate = new Date(message.createdAt);

@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
-import Header from './Header'
+import Header from './Header';
+import Message from './Message';
 import './Chat.css';
 
 const Chat = (props) => {
@@ -27,7 +28,10 @@ const Chat = (props) => {
     }
 
     return (
-        <Header messages={messages} chatName={props.url}/>
+        <div className='chat'>
+            <Header messages={messages} chatName={props.url} />
+            <Message messages={messages} />
+        </div>
     )
 }
 
