@@ -1,0 +1,21 @@
+.message-input{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+    column-gap: 14px;
+    margin-top: 1.75%;
+}
+.message-input-text{
+    width: 1000px;
+    height: 100%;
+    border: none;
+    border-radius: 32px;
+    background-color: #EFECFB;
+    padding: 5px;
+}
+.message-input-button{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}

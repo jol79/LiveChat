@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { MessagesContext } from './Chat';
 import './MessageInput.css';
+import sendButton from './sendButton.png';
 
 const MessageInput = () => {
     /**
@@ -18,7 +19,7 @@ const MessageInput = () => {
     return (
         <div className='message-input'>
             <input className='message-input-text' placeholder='Write a message...' onChange={handleOnChange} value={messages2}/>
-            <button className='message-input-button' onClick={() => setMessages(
+            <img className='message-input-button' src={sendButton} onClick={() => setMessages(
                 messages.concat(
                     [{
                         id: `${Math.random()}`,
@@ -29,9 +30,7 @@ const MessageInput = () => {
                         createdAt: new Date().toISOString(),
                         editedAt: ""
                     }]
-            ))}>
-                Send
-            </button>
+            ))}/>
         </div>
     )
 }
