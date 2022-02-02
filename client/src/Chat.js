@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
-import Header from './Header';
-import MessageList from './MessageList';
-import MessageInput from './MessageInput';
+import Header from './header/Header';
+import MessageList from './message/MessageList';
+import MessageInput from './message/MessageInput';
 import './Chat.css';
 
 export const MessagesContext = React.createContext();

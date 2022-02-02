@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
-import { MessagesContext } from './Chat';
+import { MessagesContext } from '../Chat';
 import './MessageInput.css';
-import sendButton from './sendButton.png';
+import sendButton from '../sendButton.png';
 
 const MessageInput = () => {
     /**

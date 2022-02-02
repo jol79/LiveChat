@@ -1,5 +1,5 @@
 import './Header.css';
-import { MessagesContext } from './Chat';
+import { MessagesContext } from "../Chat";
 import { useContext } from 'react';
 
 const Header = ({ chatName }) => {
