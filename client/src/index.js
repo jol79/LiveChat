@@ -3,11 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Chat from './Chat';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import generalReducer from './store/store';
 
+const store = createStore(
+  generalReducer,
+  composeWithDevTools()
+);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Chat url="https://edikdolynskyi.github.io/react_sources/messages.json"/>
+    <Provider store={store}>
+      {/* <Router> */}
+        <Chat url="https://edikdolynskyi.github.io/react_sources/messages.json"/>
+      {/* </Router> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

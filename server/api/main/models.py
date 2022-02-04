@@ -35,9 +35,17 @@ class Message(models.Model):
         return self.text
 
 
+class Role(models.Model):
+    name = models.TextField(null=False, default="User")
+
+    def __str__(self):
+        return f"Role: {self.name}"
+
+
 class Participant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, null=True)
 
     class Meta:
         ordering = ['chat']
