@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Main from './main/Main';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import generalReducer from './store/store';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './login/Login';
+import Chat from './chat/Chat';
 
 const store = createStore(
   generalReducer,
@@ -15,9 +17,16 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Main />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" exact element={<Chat />}/>
+          <Route path="/login" element={<Login />}/>
+          {/* <Route path="/users" component={Users}/>
+          <Route path="/users/edit" component={UsersEdit}/> */}
+        </Routes>
+      </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
