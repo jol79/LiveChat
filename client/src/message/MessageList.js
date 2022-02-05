@@ -1,7 +1,7 @@
 import './MessageList.css';
 import Message from './Message';
 import { useContext } from 'react';
-import { MessagesContext } from '../Chat';
+import { MessagesContext } from '../chat/Chat';
 
 const MessageList = () => {
     /**

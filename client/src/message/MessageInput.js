@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { MessagesContext } from '../Chat';
+import { MessagesContext } from '../chat/Chat';
 import './MessageInput.css';
 import sendButton from '../sendButton.png';
 

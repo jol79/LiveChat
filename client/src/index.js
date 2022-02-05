@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Chat from './Chat';
+import Main from './main/Main';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -16,9 +16,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <Router> */}
-        <Chat url="https://edikdolynskyi.github.io/react_sources/messages.json"/>
-      {/* </Router> */}
+      <Main />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

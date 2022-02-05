@@ -1,8 +1,9 @@
 import React, { Component, useEffect, useState } from 'react';
-import Header from './header/Header';
-import MessageList from './message/MessageList';
-import MessageInput from './message/MessageInput';
+import Header from '../header/Header';
+import MessageList from '../message/MessageList';
+import MessageInput from '../message/MessageInput';
 import './Chat.css';
+import { useSelector } from 'react-redux';
 
 export const MessagesContext = React.createContext();
 
@@ -14,6 +15,8 @@ const Chat = (props) => {
 
     const [messages, setMessages] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const isLogged = useSelector(state => state.logged);
+    console.log(isLogged);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -29,10 +32,12 @@ const Chat = (props) => {
         return <>Loading...</>;
     }
 
+
     return (
         <MessagesContext.Provider value={[messages, setMessages]}>
             <div className='chat'>
                 <Header chatName={props.url} />
+                <h1>User: { isLogged }</h1>
                 <MessageList />
                 <MessageInput />
             </div>
