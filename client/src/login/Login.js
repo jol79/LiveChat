@@ -20,8 +20,6 @@ const Login = () => {
     };
 
     const authorize = event => {
-
-        console.log("Form was submitted: ", email, password);
         event.preventDefault();
     
         fetch('http://127.0.0.1:8000/login', {
@@ -31,15 +29,9 @@ const Login = () => {
                 password: password
             }),
         })
-            .then(response => {
-                console.log(response);
-                return response.json()
-            })
+            .then(response => {return response.json()})
             .then(data => {
-                console.log("Returned response data: ", data);
                 if (data.authorized === true){              
-                    
-                    console.log("Redirecting!");
                     dispatch(sign_in());
                     // navigate('/');
                 } else if (data.authorized === false){

@@ -7,22 +7,23 @@ import json
 
 def chat(request):
     """
-        Required structure of the response:
-        {
-            chat_name: ...,
-            messages: [
-                [
-                    id: ...,
-                    user: {
-                        name: ...,
-                        id: ...
-                    },
-                    text: ...,
-                    created_at: ...
-                ]
+    Required structure of the response:
+    {
+        chat_name: ...,
+        participants: ...,
+        messages: [
+            [
+                id: ...,
+                user: {
+                    name: ...,
+                    id: ...
+                },
+                text: ...,
+                created_at: ...
             ]
-        }
-        """
+        ]
+    }
+    """
 
     if request.method != "GET":
         return JsonResponse({
@@ -45,8 +46,10 @@ def chat(request):
             chat_messages.append(message)
 
         chat_name = Chat.objects.get(id=1)
+        participants = Participant.objects.filter(chat=1)
         response_data = {
             "chat_name": chat_name.name,
+            "participants": len(participants),
             "messages": chat_messages
         }
     except:

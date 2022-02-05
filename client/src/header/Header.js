@@ -3,20 +3,9 @@ import { useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const Header = () => {
-    /**
-     * Returns the Header section with the following data:
-     *  1. Chat name 
-     *  2. Number of users
-     *  3. Number of messages
-     *  4. The date of the last message
-    */
-
-    const messages = useSelector(state => state.chat.messages);
     const chatName = useSelector(state => state.chat.chatName);
-    const usersNumber = useSelector(state => state.chat.participantsNumber);
+    const usersNumber = useSelector(state => state.chat.participants);
     const messagesNumber = useSelector(state => state.chat.messages.length);
-
-    console.log("Received messages: ", messages);
 
     return (
         <section className='header'>

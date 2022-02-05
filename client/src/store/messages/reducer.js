@@ -15,21 +15,20 @@ export const fetchMessages = (state=chatStateStructure, action) => {
                 editModal: false,
                 preloader: false,
                 chatName: false,
-                participantsNumber: 0,
+                participants: 0,
             }
 
             fetch("http://127.0.0.1:8000/")
                 .then(response => response.json())
                 .then(data => {
-                    for (let key in data){
-                        updatedState.messages.push(
-                            Set(data[key])
-                        )
-                    }
+                    updatedState.chatName = data.chat_name;
+                    updatedState.messages = [...data.messages];
+                    updatedState.participants = data.participants;
                 }
             );
             
             console.log("Fetched messages: ", updatedState);
+            return updatedState;
         }   
         default:
             return state;
