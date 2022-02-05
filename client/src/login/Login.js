@@ -31,7 +31,10 @@ const Login = () => {
                 password: password
             }),
         })
-            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                return response.json()
+            })
             .then(data => {
                 console.log("Returned response data: ", data);
                 if (data.authorized === true){              

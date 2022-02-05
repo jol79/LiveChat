@@ -48,12 +48,13 @@ def login(request):
         })
 
     request_data = json.loads(request.body.decode('utf-8'))
-    query_result = User.objects.get(
-        email=request_data['email'],
-        password=request_data['password']
-    )
     
-    if query_result:
+    try:
+        query_result = User.objects.get(
+            email=request_data['email'],
+            password=request_data['password']
+        )
+
         user_role = Participant.objects.get(user=query_result.id, chat=1)
         print("Returned user role: ", user_role)
         response_data = {
@@ -62,7 +63,7 @@ def login(request):
             'wrong_credentials': False,
             'wrong_request_type': True
         }
-    else:
+    except:
         response_data = {
             'authorized': False,
             'wrong_credentials': True,
