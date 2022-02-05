@@ -13,13 +13,13 @@ const Message = ({messageObject}) => {
 
                 <div className='message-container'>
                     <div className='message-user-name'>
-                        <p>{messageObject.user}</p>
+                        <p>{messageObject.user.name}</p>
                     </div>
                     <div className='message-text'>
                         <p>{messageObject.text}</p>
                     </div>
                     <div className='message-time'>
-                        <p>{`${new Date(messageObject.createdAt).getHours()}:${new Date(messageObject.createdAt).getMinutes()}`}</p>
+                        <p>{`${new Date(messageObject.created_at).getHours()}:${new Date(messageObject.created_at).getMinutes()}`}</p>
                     </div>
                     <div className='message-like'></div>
                 </div>

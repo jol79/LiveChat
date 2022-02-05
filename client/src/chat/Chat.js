@@ -15,26 +15,23 @@ const Chat = () => {
      * using components specified in the reqs
     */
 
-    const [messages, setMessages] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const url = "https://edikdolynskyi.github.io/react_sources/messages.json";
     const userAuthorized = useSelector(state => state.logged);
     const dispatch = useDispatch();
     dispatch(fetch_messages());
 
-    useEffect(() => {
-        const fetchMessages = async () => {
-            const response = await fetch(url)
-            const data = await response.json();
-            setMessages(data);
-            setIsLoading(false);
-        };
-        fetchMessages();
-    }, []);
+    // useEffect(() => {
+    //     const fetchMessages = async () => {
+    //         const response = await fetch(url)
+    //         const data = await response.json();
+    //         setMessages(data);
+    //         setIsLoading(false);
+    //     };
+    //     fetchMessages();
+    // }, []);
 
-    if (isLoading){
-        return <>Loading...</>;
-    }
+    // if (isLoading){
+    //     return <>Loading...</>;
+    // }
 
     if (userAuthorized === false){
         return (
@@ -45,8 +42,8 @@ const Chat = () => {
     return (
         <div className='chat'>
             <Header/>
-            {/* <MessageList/>
-            <MessageInput/> */}
+            <MessageList/>
+            {/* <MessageInput/> */}
         </div>
     )
 }
