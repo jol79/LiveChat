@@ -3,7 +3,8 @@ import Header from '../header/Header';
 import MessageList from '../message/MessageList';
 import MessageInput from '../message/MessageInput';
 import './Chat.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetch_messages } from '../store/messages/actions';
 import { Navigate } from 'react-router-dom';
 
 export const MessagesContext = React.createContext();
@@ -18,6 +19,8 @@ const Chat = () => {
     const [isLoading, setIsLoading] = useState(true);
     const url = "https://edikdolynskyi.github.io/react_sources/messages.json";
     const userAuthorized = useSelector(state => state.logged);
+    const dispatch = useDispatch();
+    dispatch(fetch_messages());
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -33,20 +36,18 @@ const Chat = () => {
         return <>Loading...</>;
     }
 
-    console.log("ON THE CHAT PAGE, userAuth=", userAuthorized);
     if (userAuthorized === false){
         return (
             <Navigate to="/login"/>
         )
     }
+
     return (
-        <MessagesContext.Provider value={[messages, setMessages]}>
-            <div className='chat'>
-                <Header chatName={url} />
-                <MessageList />
-                <MessageInput />
-            </div>
-        </MessagesContext.Provider>
+        <div className='chat'>
+            <Header/>
+            {/* <MessageList/>
+            <MessageInput/> */}
+        </div>
     )
 }
 

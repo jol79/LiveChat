@@ -6,27 +6,53 @@ import json
 
 
 def chat(request):
+    """
+        Required structure of the response:
+        {
+            chat_name: ...,
+            messages: [
+                [
+                    id: ...,
+                    user: {
+                        name: ...,
+                        id: ...
+                    },
+                    text: ...,
+                    created_at: ...
+                ]
+            ]
+        }
+        """
 
     if request.method != "GET":
         return JsonResponse({
             'wrong_request_type': True
         })
 
-    chat_messages_query = Message.objects.filter(chat=1)
-    chat_messages = {}
-
-    for item in chat_messages_query:
-        chat_messages[item.id] = {
-            "id": item.id,
-            "user": {
+    try:
+        chat_messages_query = Message.objects.filter(chat=1)
+        chat_messages = []
+        
+        for item in chat_messages_query:
+            message = {}
+            message["id"] = item.id
+            message["user"] = {
                 "id": item.user.id,
                 "name": item.user.name
-            },
-            "text": item.text,
-            "created_at": item.created_at
-        }
+            }
+            message["text"] = item.text
+            message["created_at"] = item.created_at
+            chat_messages.append(message)
 
-    return JsonResponse(chat_messages)
+        chat_name = Chat.objects.get(id=1)
+        response_data = {
+            "chat_name": chat_name.name,
+            "messages": chat_messages
+        }
+    except:
+        response_data = {}
+
+    return JsonResponse(response_data)
 
 
 @csrf_exempt
@@ -56,7 +82,6 @@ def login(request):
         )
 
         user_role = Participant.objects.get(user=query_result.id, chat=1)
-        print("Returned user role: ", user_role)
         response_data = {
             'authorized': True,
             'role': user_role.role.name,

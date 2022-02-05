@@ -1,8 +1,8 @@
 import './Header.css';
-import { MessagesContext } from "../chat/Chat";
 import { useContext } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Header = ({ chatName }) => {
+const Header = () => {
     /**
      * Returns the Header section with the following data:
      *  1. Chat name 
@@ -11,35 +11,12 @@ const Header = ({ chatName }) => {
      *  4. The date of the last message
     */
 
-    const test = useContext(MessagesContext);
-    console.log("TEST: " + test);
-    const [messages, setMessages] = useContext(MessagesContext);
-    console.log("Header: " + messages);
+    const messages = useSelector(state => state.chat.messages);
+    const chatName = useSelector(state => state.chat.chatName);
+    const usersNumber = useSelector(state => state.chat.participantsNumber);
+    const messagesNumber = useSelector(state => state.chat.messages.length);
 
-    // try{
-    var chatName = messages.chatName;        
-    var usersNumber = new Array();
-    var messagesNumber = messages.length;
-    var lastMessageDate;
-
-    messages.forEach(message => {
-        if (!lastMessageDate){
-            lastMessageDate = new Date(message.createdAt);
-        }else{
-            if (lastMessageDate < new Date(message.createdAt)){
-                lastMessageDate = new Date(message.createdAt)
-            }
-        }
-
-        if (!usersNumber.includes(message.userId)){
-            usersNumber.push(message.userId);
-        }
-    });
-    usersNumber = usersNumber.length;
-
-    // }catch{
-    //     console.error("Unable to process the header");
-    // }
+    console.log("Received messages: ", messages);
 
     return (
         <section className='header'>
@@ -56,11 +33,6 @@ const Header = ({ chatName }) => {
             <div className='header-messages-count'>
                 <p>
                     {messagesNumber} messages
-                </p>
-            </div>
-            <div className='header-last-message-date'>
-                <p>
-                    last message {`${lastMessageDate.toLocaleDateString("ru-RU")} ${lastMessageDate.toLocaleTimeString("ru-RU")}`}
                 </p>
             </div>
         </section>

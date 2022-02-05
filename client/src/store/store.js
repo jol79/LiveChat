@@ -6,7 +6,7 @@ const generalReducer = combineReducers({
     logged: isLogged,
     admin: isAdmin,
     owner: isOwner,
-    messages: fetchMessages,
+    chat: fetchMessages,
 });
 
 export default generalReducer;
